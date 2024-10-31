@@ -27,7 +27,7 @@ async def team(ctx, nb: int):
     if nb%2 != 0:
         impaire = random.choice(equipe)
         equipe.remove(impaire)
-    for i in range(nb):
+    for i in range(nb//2):
         x= random.choice(equipe)
         equipe.remove(x)
         y = random.choice(equipe)
@@ -35,6 +35,7 @@ async def team(ctx, nb: int):
         await ctx.send(f'Équipe {x} vs Équipe {y}')
     if nb%2 != 0:
         await ctx.send(f'Equipe restante : Equipe {impaire}')
+
 
 
 
