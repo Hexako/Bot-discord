@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+from TOKEN import token
 import random
 
 
@@ -96,4 +96,4 @@ async def emoji(ctx, *, mess):
         await ctx.message.add_reaction("❌")
 
 print(f'Lancement du bot...')
-bot.run("MTI5NzM1NDUwMjA2Nzk3ODI2MQ.GMAb2w.FtW7Q0tVfuUT4uDKeVmzZJ81Qo6mOKjfAG7MFw")
+bot.run(token)
