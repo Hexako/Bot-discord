@@ -80,5 +80,13 @@ async def spamDM(ctx, nb: int, member: discord.Member , temps: int = 1, *, text:
             time.sleep(temps)
     except: ctx.message.add_reaction("❌")
 
+# !say -> fait parler le bot (il dit le message et supprime le tient)
+@bot.command()
+@commands.has_permissions(administrator=True)
+async def say(ctx, *, text):
+    message = ctx.message
+    await message.delete()
+    await ctx.send(f"{text}")
+
 print(f'Lancement du bot...')
 bot.run(token)
