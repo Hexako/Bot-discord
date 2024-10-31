@@ -42,57 +42,15 @@ async def team(ctx, nb: int):
 # !e [message] -> envoi réactions du message sur mess répondu
 @bot.command(aliases=['e'])
 async def emoji(ctx, *, mess):
-    verif = False
+    if len(mess) == len(set(mess)) and all(c.isalpha() for c in mess):
+        await ctx.message.delete()
+        id = await ctx.channel.fetch_message(ctx.message.reference.message_id)
+        emoji_ids = {chr(i): chr(127462 + i - ord('a')) for i in range(ord('a'), ord('z') + 1)}
 
-    if len(mess) == len(set(mess)):
-
-        for i in list(mess.lower()):
-            if i in [chr(lettre) for lettre in range(ord('a'), ord('z') + 1)]:
-                verif = True
-            else:
-                verif = False
-                break
-
-        if verif:
-            await ctx.message.delete()
-            id = await ctx.channel.fetch_message(ctx.message.reference.message_id)
-            emoji_ids = {
-                'a': '🇦',
-                'b': '🇧',
-                'c': '🇨',
-                'd': '🇩',
-                'e': '🇪',
-                'f': '🇫',
-                'g': '🇬',
-                'h': '🇭',
-                'i': '🇮',
-                'j': '🇯',
-                'k': '🇰',
-                'l': '🇱',
-                'm': '🇲',
-                'n': '🇳',
-                'o': '🇴',
-                'p': '🇵',
-                'q': '🇶',
-                'r': '🇷',
-                's': '🇸',
-                't': '🇹',
-                'u': '🇺',
-                'v': '🇻',
-                'w': '🇼',
-                'x': '🇽',
-                'y': '🇾',
-                'z': '🇿',
-            }
-
-            for i in list(mess.lower()):
-                emoji_id = emoji_ids.get(i)
-                if emoji_id:
-                    await id.add_reaction(emoji_id)
-
-
-        else:
-            await ctx.message.add_reaction("❌")
+        for char in mess.lower():
+            emoji_id = emoji_ids.get(char)
+            if emoji_id:
+                await id.add_reaction(emoji_id)
     else:
         await ctx.message.add_reaction("❌")
 
