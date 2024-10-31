@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from TOKEN import token
 import random
+import time
 
 
 # intents : en rapport avec les permissions
@@ -53,6 +54,39 @@ async def emoji(ctx, *, mess):
                 await id.add_reaction(emoji_id)
     else:
         await ctx.message.add_reaction("❌")
+
+# !spam [nb] [user] [intervalle de temps] [texte]
+@bot.command(aliases=['harcelement'])
+async def spam(ctx, nb: int, member: discord.Member , temps: int = 1, *, text: str = "Je te spam"):
+
+    try:
+        await ctx.message.delete()
+        if ctx.author.id == 431181653780725791:
+            for i in range(nb):
+                await ctx.send(f" {member.mention} {text}")
+                time.sleep(temps)
+        else:
+            if nb <= 15 and member.id != 431181653780725791 and temps <= 5:
+                for i in range(nb):
+                    await ctx.send(f" {member.mention} {text}")
+                    time.sleep(temps)
+            else: await ctx.send("Spammer, c'est mal. Revoie les valeurs que tu as mit à la baisse. Faut pas abuser non plus.")
+
+    except: await ctx.message.add_reaction("❌")
+
+
+@bot.command()
+async def spamDM(ctx, nb: int, member: discord.Member , temps: int = 1, *, text: str = "Je te spam"):
+
+    try:
+        await ctx.message.delete()
+        if ctx.author.id == 431181653780725791:
+            for i in range(nb):
+                await member.send(f" {member.mention} {text}")
+                time.sleep(temps)
+        else: await ctx.send("Tu n'es pas assez puissant pour utiliser cette commande. Et de toute façon : **Spammer, c'est mal.**") # pareil que au dessus mais spam en DM
+
+    except: ctx.message.add_reaction("❌")
 
 print(f'Lancement du bot...')
 bot.run(token)
