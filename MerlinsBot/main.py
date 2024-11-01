@@ -3,6 +3,7 @@ from discord.ext import commands
 from TOKEN import token
 import random
 import time
+import test
 
 from blagues_api import BlaguesAPI, BlagueType
 blagues = BlaguesAPI("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDMxMTgxNjUzNzgwNzI1NzkxIiwibGltaXQiOjEwMCwia2V5IjoiTVRQbEJORFdGNXVYTHRFdjAwUFR1MjNXRHJNY1pra3RqcEEwWUJVRGIxekxmSmpzYUgiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0xNlQyMDowMDowNyswMDowMCIsImlhdCI6MTY5NzQ4NjQwN30.99n9pQSqkRjmUvf-aPsRltjW2AbPMYRAgvuCIILoVTk")
@@ -10,9 +11,11 @@ blagues = BlaguesAPI("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDMxM
 
 # intents : en rapport avec les permissions
 intents = discord.Intents.all()
+intents.message_content = True
 bot = commands.Bot(command_prefix = "!", intents=intents)
 
 bot.remove_command("help")
+bot.load_extension('commands')
 
 @bot.event
 async def on_ready():
@@ -94,7 +97,8 @@ async def say(ctx, *, text):
 @bot.event
 async def on_message_delete(message):
     channel = bot.get_channel(1301697629197045800)
-    if(message.author.bot):
+    messageUser = message.content
+    if messageUser[:1] == "!":
         return
     await channel.send(embed=discord.Embed(
         title=f'Message supprimé de **{message.author}**',
