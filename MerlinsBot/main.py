@@ -3,13 +3,16 @@ from discord.ext import commands
 from TOKEN import token
 import random
 import time
+import test
 
 
 # intents : en rapport avec les permissions
 intents = discord.Intents.all()
+intents.message_content = True
 bot = commands.Bot(command_prefix = "!", intents=intents)
 
 bot.remove_command("help")
+bot.load_extension('commands')
 
 @bot.event
 async def on_ready():
