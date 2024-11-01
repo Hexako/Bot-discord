@@ -1,5 +1,6 @@
 ﻿import discord
 from discord.ext import commands
+import time
 
 def setup(bot):
     @bot.event

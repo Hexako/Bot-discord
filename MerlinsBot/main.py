@@ -3,7 +3,7 @@ from discord.ext import commands
 from TOKEN import token
 import random
 import time
-from MerlinsBot.CommandFile import pingCommand,logCommand,spamCommand,tournamentCommand,baseCommand,jokeCommand,emojiCommand
+from MerlinsBot.CommandFile import pingCommand,logCommand,spamCommand,tournamentCommand,baseCommand,jokeCommand,emojiCommand,scoreboardCommand
 
 
 
@@ -20,6 +20,8 @@ tournamentCommand.setup(bot)
 baseCommand.setup(bot)
 jokeCommand.setup(bot)
 emojiCommand.setup(bot)
+scoreboardCommand.setup(bot)
+
 
 @bot.event
 async def on_ready():
