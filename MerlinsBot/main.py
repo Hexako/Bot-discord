@@ -15,7 +15,6 @@ intents.message_content = True
 bot = commands.Bot(command_prefix = "!", intents=intents)
 
 bot.remove_command("help")
-bot.load_extension('commands')
 
 @bot.event
 async def on_ready():
@@ -100,10 +99,13 @@ async def on_message_delete(message):
     messageUser = message.content
     if messageUser[:1] == "!":
         return
-    await channel.send(embed=discord.Embed(
+    embed = discord.Embed(
         title=f'Message supprimé de **{message.author}**',
         description=f'**{message.content}**',
-        color=0xFF0000))
+        color=0xFF0000)
+    embed.set_footer(text=f'{time.asctime()}')
+
+    await channel.send(embed=embed)
 
 # !blague -> Fait des blagues quoi...
 @bot.command(aliases=['b'])
