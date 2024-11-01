@@ -91,7 +91,8 @@ async def say(ctx, *, text):
 @bot.event
 async def on_message_delete(message):
     channel = bot.get_channel(1301697629197045800)
-    if(message.author.bot):
+    messageUser = message.content
+    if messageUser[:1] == "!":
         return
     await channel.send(embed=discord.Embed(
         title=f'Message supprimé de **{message.author}**',
