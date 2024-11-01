@@ -88,5 +88,13 @@ async def say(ctx, *, text):
     await message.delete()
     await ctx.send(f"{text}")
 
+@bot.event
+async def on_message_delete(message):
+    channel = bot.get_channel(1301697629197045800)
+    await channel.send(embed=discord.Embed(
+        title=f'Message supprimé de **{message.author}**',
+        description=f'**{message.content}**',
+        color=0xFF0000))
+
 print(f'Lancement du bot...')
 bot.run(token)
