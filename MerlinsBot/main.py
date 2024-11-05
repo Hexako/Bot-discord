@@ -1,9 +1,14 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
+from discord.ui import Select, View, Button
 from TOKEN import token
 import random
 import time
-from MerlinsBot.CommandFile import pingCommand,logCommand,spamCommand,tournamentCommand,baseCommand,jokeCommand,emojiCommand,scoreboardCommand
+import sqlite3
+import os.path
+from CommandFile import *
+
 
 
 
@@ -21,11 +26,19 @@ baseCommand.setup(bot)
 jokeCommand.setup(bot)
 emojiCommand.setup(bot)
 scoreboardCommand.setup(bot)
+MultiversusCommand.setup(bot)
 
 
 @bot.event
 async def on_ready():
-    print(f"Bot prêt ! |{bot.user.name}|")
+    print(f"Bot {bot.user.name} prêt !")
+
+    try:
+        synced = await bot.tree.sync()  # Synchronise les commandes Slash
+        print(f"Commandes Slash synchronisées : {len(synced)}")
+    except Exception as e:
+        print(f"Erreur lors de la synchronisation : {e}")
+
     await bot.change_presence(status=discord.Status.online, activity=discord.Game('Soulager la peine de Yann'))
 
 print(f'Lancement du bot...')
