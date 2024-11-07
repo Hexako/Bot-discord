@@ -1,5 +1,7 @@
 ﻿from blagues_api import BlaguesAPI, BlagueType
-blagues = BlaguesAPI("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDMxMTgxNjUzNzgwNzI1NzkxIiwibGltaXQiOjEwMCwia2V5IjoiTVRQbEJORFdGNXVYTHRFdjAwUFR1MjNXRHJNY1pra3RqcEEwWUJVRGIxekxmSmpzYUgiLCJjcmVhdGVkX2F0IjoiMjAyMy0xMC0xNlQyMDowMDowNyswMDowMCIsImlhdCI6MTY5NzQ4NjQwN30.99n9pQSqkRjmUvf-aPsRltjW2AbPMYRAgvuCIILoVTk")
+from TOKEN import blagues
+
+blagues = BlaguesAPI(blagues)
 
 def setup(bot):
     # !blague -> Fait des blagues quoi...
