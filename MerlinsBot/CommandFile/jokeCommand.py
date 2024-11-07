@@ -6,11 +6,11 @@ blagues = BlaguesAPI(blagues)
 def setup(bot):
     # !blague -> Fait des blagues quoi...
     @bot.command(aliases=['b'])
-    async def blague(ctx):
-        blague = await blagues.random()
-        await ctx.send(f"*type de blague : {blague.type}*\n{blague.joke}\n||{blague.answer}||")
+    async def blague(ctx, *, txt):
 
-    @bot.command(aliases=['bdev'])
-    async def blaguedev(ctx):
-        blague = await blagues.random_categorized(BlagueType.DEV)
+        if txt == "dev":
+            blague = await blagues.random_categorized(BlagueType.DEV)
+        else:
+            blague = await blagues.random()
+
         await ctx.send(f"*type de blague : {blague.type}*\n{blague.joke}\n||{blague.answer}||")
