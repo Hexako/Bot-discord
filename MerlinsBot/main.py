@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from discord.ui import Select, View, Button
-from TOKEN import token
+from TOKEN import token, blagues
 import random
 import time
 import sqlite3
