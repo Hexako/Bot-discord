@@ -26,6 +26,14 @@ Lorsqu'un admin effectue la commande,
 une rubrique supplémentaire s'affiche
 pour les commandes administratives./
 
+-say
+a
+*
+Permet de faire parler le bot.
+https://pastebin.com/SJ2FpaKN
+Permet de faire parler le bot avec un message personnalisé.
+Il suffit de mettre le message souhaité après la commande.
+Le bot supprimera le message de l'utilisateur et enverra le message./
 
 -hi
 f
@@ -33,3 +41,4 @@ f
 Renvoie Hi !
 https://urlz.fr/4nf
 Le bot vous répondra avec le message "Hi !"/
+

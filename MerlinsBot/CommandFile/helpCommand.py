@@ -39,23 +39,35 @@ def setup(bot):
 
         def message_base():
 
-            mess = '\n'.join([f'`{commandes[i][0]}` - {commandes[i][3]}' for i in range(len(commandes))])
+            mess = '\n'.join([f'`{commandes[i][0]}` - {commandes[i][3]}' for i in range(len(commandes)) if commandes[i][1] != "a"])
+
+            # Pour le cas type = "a"
+            if admin:
+                b = '\n'.join([f'`{commandes[i][0]}` - {commandes[i][3]}' for i in range(len(commandes)) if commandes[i][1] == "a"])
+                a = f"\n\n**__Admin__**\n{b}"
+            else: a = ""
 
             embed = discord.Embed(
                 title="**Liste des commandes**\n\n",
-                description=mess,
+                description=mess + a,
                 color=0x00FA1D
             )
 
             return embed
 
-        def message_det(num):
+        def message_det(num, commandes):
 
+            temp = [i for i in commandes if i[1] != "a"]
+            temp += [i for i in commandes if i[1] == "a"]
+            commandes = temp
+
+            # Pour l'aliases
             if commandes[num-1][2] == "*":
                 alias = ""
             else:
                 alias = f"Aliases : `{'` `'.join(commandes[num-1][2].split(','))}`\n"
 
+            # Pour la catégorie
             type = commandes[num-1][1]
             if type == ("u"):
                 type = "Utilitaire"
@@ -64,17 +76,31 @@ def setup(bot):
             elif type == ("f"):
                 type = "Fun"
 
+
             embed = discord.Embed(
                 title=f"Détails de la commande : `{commandes[num-1][0]}`\n\n",
-                description=f"Catégorie : {type}\n" + alias + f"\n__Description détaillée :__\n{commandes[num-1][5]}\n\n" + f"[Exemple d'utilisation de la commande]({commandes[num-1][4]})",
+                description=f"Catégorie : {type}\n" +
+                            alias + f"\n__Description détaillée :__\n{commandes[num-1][5]}\n\n" +
+                            f"[Exemple d'utilisation de la commande]({commandes[num-1][4]})",
                 color=0x00FA1D
             )
 
             return embed
 
 
-        nom_commandes = [commande[0] for commande in commandes]
+        nom_commandes = [commande[0] for commande in commandes if commande[1] != "a"]
 
+        #Celui qui clique
+        user = interaction.user
+        # Celui qui clique est dans le serveur ? (et donc pas en MP)
+        if interaction.guild:
+            # Celui qui clique a t'il les perms admin ?
+            admin = user.guild_permissions.administrator
+            if admin:
+                nom_commandes += [commande[0] for commande in commandes if commande[1] == "a"]
+        else: admin = False
+
+        # Ce qui sera affiché dans le menu déroulant
         options = (
                 [discord.SelectOption(label="Retour", value="0")] +
                 [discord.SelectOption(label=f"{nom_commandes[i]}", value=str(i+1)) for i in range(len(nom_commandes))]
@@ -87,12 +113,15 @@ def setup(bot):
             # Num commande choisie
             num_com = int(select.values[0])
 
+            # Vérif si c'est la même personne qui à fait la commande et qui à cliqué
+            if user != interaction.user:
+                await interaction.response.send_message("Il faut être à l'origine de la commande pour pouvoir interagir", ephemeral=True)
+                return
+
             if num_com == 0:
                 await interaction.response.edit_message(embed=message_base())
 
-            else:
-
-                await interaction.response.edit_message(embed=message_det(num_com), view=view)
+            else: await interaction.response.edit_message(embed=message_det(num_com, commandes), view=view)
 
         select.callback = select_callback
         view = View()
