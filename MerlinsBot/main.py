@@ -28,7 +28,7 @@ jokeCommand.setup(bot)
 emojiCommand.setup(bot)
 scoreboardCommand.setup(bot)
 MultiversusCommand.setup(bot)
-help.setup(bot)
+helpCommand.setup(bot)
 
 
 @bot.event
