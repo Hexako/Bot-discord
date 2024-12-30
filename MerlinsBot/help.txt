@@ -1,0 +1,35 @@
+|Fichier servant à l'affichage des commandes disponibles avec le bot avec une description brève et détaillé de celle-ci.
+|
+|Elle affichera d'abord le nom de la commande et sa brève description et on pourra lire sa description
+|détaillé en la choisissant dans un menu déroulant.
+|
+|Mettre les commandes sous cette forme :
+|
+|-[Commande]
+|[u/f/a] (utilitaire/fun/admin)
+|[Aliase], [Aliase], [Aliase], [Aliase], [Aliase], ... (mettre "*" si la commande n'a pas d'aliase)
+|[Brève description de la commande]
+|[Lien de l'image montrant un exemple d'utilisation de la commande]
+|[description
+|détaillé de la
+|commande]/     <--- Ne pas oublier de mettre un / à la fin de la description détaillé
+|
+|Mettre ce lien en attendant d'en mettre un vrai : https://pastebin.com/SJ2FpaKN
+
+-help
+u
+!aide,!h,!a,/help
+Affiche les commandes disponibles avec le bot.
+https://pastebin.com/SJ2FpaKN
+Affiche la majeurs partie des commandes disponibles avec le bot.
+Lorsqu'un admin effectue la commande,
+une rubrique supplémentaire s'affiche
+pour les commandes administratives./
+
+
+-hi
+f
+*
+Renvoie Hi !
+https://urlz.fr/4nf
+Le bot vous répondra avec le message "Hi !"/

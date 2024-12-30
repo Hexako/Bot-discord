@@ -18,6 +18,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix = "!", intents=intents)
 
 bot.remove_command("help")
+
 pingCommand.setup(bot)
 logCommand.setup(bot)
 spamCommand.setup(bot)
@@ -27,6 +28,7 @@ jokeCommand.setup(bot)
 emojiCommand.setup(bot)
 scoreboardCommand.setup(bot)
 MultiversusCommand.setup(bot)
+help.setup(bot)
 
 
 @bot.event
